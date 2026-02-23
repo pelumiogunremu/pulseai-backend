@@ -80,6 +80,13 @@ const analysisSchema = {
   required: ["user_message", "internal_actions"]
 };
 
+// Simple health and root endpoints
+app.get('/', (req, res) => {
+  res.send('PulseAI backend is running. POST /webhook for Twilio messages.');
+});
+
+app.get('/health', (req, res) => res.status(200).json({ status: 'ok' }));
+
 // Main Webhook Route for WhatsApp
 app.post('/webhook', async (req, res) => {
   const incomingMsg = req.body.Body;
